@@ -54,14 +54,12 @@ int pchar_opcode(stack_t **stack, unsigned int line_number,
 		fprintf(stderr, "L%u: can't pchar, stack empty\n", line_number);
 		return (0);
 	}
-	tos = pop_stack_t(stack);
+	tos = *stack;
 	if (tos->n < 0 || tos->n > 127)
 	{
 		fprintf(stderr, "L%u: can't pchar, value out of range\n", line_number);
-		free_stack_t(&tos);
 		return (0);
 	}
-	printf("%c\n", (char)tos->n);
-	free_stack_t(&tos);
+	fprintf(stdout, "%c\n", (char)tos->n);
 	return (1);
 }
