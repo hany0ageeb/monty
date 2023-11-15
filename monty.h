@@ -74,5 +74,7 @@ int div_opcode(stack_t **stack, unsigned int line_number, char *arg,
 		data_format_t *format);
 int mul_opcode(stack_t **stack, unsigned int line_number, char *arg,
 		data_format_t *format);
+int mod_opcode(stack_t **stack, unsigned int line_number, char *arg,
+		data_format_t *format);
 int interpret_file(const char *file);
 #endif
