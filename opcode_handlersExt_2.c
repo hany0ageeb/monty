@@ -55,7 +55,7 @@ int pchar_opcode(stack_t **stack, unsigned int line_number,
 		return (0);
 	}
 	tos = *stack;
-	if (tos->n < 0 || tos->n > 127)
+	if (tos->n <= 0 || tos->n > 127)
 	{
 		fprintf(stderr, "L%u: can't pchar, value out of range\n", line_number);
 		return (0);
