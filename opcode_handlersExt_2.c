@@ -35,3 +35,33 @@ int mod_opcode(stack_t **stack, unsigned int line_number,
 	free_stack_t(&op2);
 	return (result != NULL);
 }
+/**
+ * pchar_opcode - pchar opcode handler
+ * @stack: stack
+ * @line_number: line number
+ * @arg: argument
+ * @format: data format (stack / queue).
+ * Return: 1 on success 0 on failure
+ */
+int pchar_opcode(stack_t **stack, unsigned int line_number,
+		__attribute__((unused))char *arg,
+		__attribute__((unused))data_format_t *format)
+{
+	stack_t *tos = NULL;
+
+	if ((*stack) == NULL)
+	{
+		fprintf(stderr, "L%u: can't pchar, stack empty\n", line_number);
+		return (0);
+	}
+	tos = pop_stack_t(stack);
+	if (tos->n < 64 || tos->n > 127)
+	{
+		fprintf(stderr, "L%u: can't pchar, value out of range\n", line_number);
+		free_stack_t(&tos);
+		return (0);
+	}
+	printf("%c\n", tos->n);
+	free_stack_t(&tos);
+	return (1);
+}
