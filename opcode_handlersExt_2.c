@@ -86,3 +86,30 @@ int pstr_opcode(stack_t **stack,
 	printf("\n");
 	return (1);
 }
+/**
+ * rotl_opcode - rotl opcode handler
+ * @stack: stack
+ * @line_number: line number
+ * @arg: argument
+ * @format: format
+ * Return: always 1
+ */
+int rotl_opcode(stack_t **stack,
+		__attribute__((unused))unsigned int line_number,
+		__attribute__((unused))char *arg,
+		__attribute__((unused))data_format_t *format)
+{
+	stack_t *tos = NULL;
+
+	if (*stack == NULL || (*stack)->next == NULL)
+		return (1);
+	if (enqueue_stack_t(stack, (*stack)->n) != NULL)
+	{
+		tos = pop_stack_t(stack);
+		free_stack_t(&tos);
+		return (1);
+	}
+	else
+		return (0);
+}
+
