@@ -60,6 +60,29 @@ int pchar_opcode(stack_t **stack, unsigned int line_number,
 		fprintf(stderr, "L%u: can't pchar, value out of range\n", line_number);
 		return (0);
 	}
-	fprintf(stdout, "%c\n", (char)tos->n);
+	printf("%c\n", (char)tos->n);
+	return (1);
+}
+/**
+ * pst_opcode - pstr opcode handler
+ * @stack: stack
+ * @line_number: line number
+ * @arg: argument
+ * @format: format
+ * Return: 1 always
+ */
+int pstr_opcode(stack_t **stack,
+		__attribute__((unused))unsigned int line_number,
+		__attribute__((unused))char *arg,
+		__attribute__((unused))data_format_t *format)
+{
+	stack_t *current = (*stack);
+
+	while (current != NULL && current->n > 0 && current->n <= 127)
+	{
+		printf("%c", (char)current->n);
+		current = current->next;
+	}
+	printf("\n");
 	return (1);
 }

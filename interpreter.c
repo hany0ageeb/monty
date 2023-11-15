@@ -106,6 +106,8 @@ int set_instruction_t_func(instruction_t *inst, size_t line_number)
 			inst->f = &mod_opcode;
 		else if (str_equal(inst->opcode, "pchar"))
 			inst->f = &pchar_opcode;
+		else if (str_equal(inst->opcode, "pstr"))
+			inst->f = &pstr_opcode;
 		else
 		{
 			fprintf(stderr, "L%lu: unknown instruction %s\n",
