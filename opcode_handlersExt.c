@@ -84,7 +84,7 @@ int sub_opcode(stack_t **stack, unsigned int line_number,
 int div_opcode(stack_t **stack, unsigned int line_number,
 		__attribute__((unused))char *arg, data_format_t *format)
 {
-	stack_t *op2, *op1, *result;
+	stack_t *op2 = NULL, *op1 = NULL, *result = NULL;
 
 	if (count_stack_t(*stack) < 2)
 	{
@@ -95,7 +95,7 @@ int div_opcode(stack_t **stack, unsigned int line_number,
 	if (op2->n == 0)
 	{
 		fprintf(stderr, "L%u: division by zero\n", line_number);
-		free_stack_t(&op1);
+		free_stack_t(&op2);
 		return (0);
 	}
 	op1 = pop_stack_t(stack);
