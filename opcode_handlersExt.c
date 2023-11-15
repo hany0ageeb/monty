@@ -1,5 +1,22 @@
 #include "monty.h"
 #include <stdio.h>
+
+/**
+ * nop_opcode - nop opcode handler
+ * @stack: stack
+ * @line_number: line number
+ * @arg: argument
+ * @format: stack / queue data format
+ * Return: 1 always
+ */
+int nop_opcode(
+		__attribute__((unused)) stack_t **stack,
+		__attribute__((unused)) unsigned int line_number,
+		__attribute__((unused)) char *arg,
+		__attribute__((unused)) data_format_t *format)
+{
+	return (1);
+}
 /**
  * add_opcode - handle add opcode
  * @stack: stack
