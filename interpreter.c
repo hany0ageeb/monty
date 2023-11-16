@@ -12,11 +12,7 @@
  */
 int is_alphanumeric(const char c)
 {
-	return (
-			(c >= 'a' && c <= 'z') ||
-			(c >= 'A' && c <= 'Z') ||
-			(c >= '0' && c <= '9')
-			);
+	return (c != ' ' && c != '\t' && c != '#');
 }
 /**
  * print_unknown - print unknow instruction
