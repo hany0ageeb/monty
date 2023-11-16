@@ -5,15 +5,7 @@
 #include <stdio.h>
 #include <sys/types.h>
 #include <stdlib.h>
-/**
- * is_alphanumeric - check if char is alpha numeric char
- * @c: char to check
- * Return: True if it is otherwise false
- */
-int is_alphanumeric(const char c)
-{
-	return (c != ' ' && c != '\t' && c != '#');
-}
+
 /**
  * print_unknown - print unknow instruction
  * @inst: instruction_t object
@@ -54,7 +46,7 @@ instruction_t *tokenize(const char *line)
 				inst = create_instruction_t(NULL, NULL);
 			if (inst == NULL)
 				return (inst);
-			while (!(IS_AT_END(line[current])) && is_alphanumeric(line[current]))
+			while (!(IS_AT_END(line[current])) && IS_ALPHANUMERIC(line[current]))
 				current++;
 			if (inst->opcode == NULL)
 				inst->opcode = sub_str(line, start, current - 1);

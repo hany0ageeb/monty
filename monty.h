@@ -2,6 +2,7 @@
 #define MONTY_H
 #include <stddef.h>
 #define IS_AT_END(c) ((c) == '\0' || (c) == '\n')
+#define IS_ALPHANUMERIC(c) ((c != ' ') && (c != '\t') && (c != '#'))
 /**
  * enum data_format - Data Format (Stack or Queu)
  * @STACK_FORMAT: stack data format
