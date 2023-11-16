@@ -82,5 +82,7 @@ int pstr_opcode(stack_t **stack, unsigned int line_number, char *arg,
 		data_format_t *format);
 int rotl_opcode(stack_t **stack, unsigned int line_number, char *arg,
 		data_format_t *format);
+int rotr_opcode(stack_t **stack, unsigned int line_number, char *arg,
+		data_format_t *format);
 int interpret_file(const char *file);
 #endif

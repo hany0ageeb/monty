@@ -112,4 +112,31 @@ int rotl_opcode(stack_t **stack,
 	else
 		return (0);
 }
+/**
+ * rotr_opcode - rotr opcode handler
+ * @stack: stack
+ * @line_number: line number
+ * @arg: argument
+ * @format: data format (stack or queue)
+ * Return: 1 on success 0 on failure
+ */
+int rotr_opcode(stack_t **stack,
+		__attribute__((unused))unsigned int line_number,
+		__attribute__((unused))char *arg,
+		__attribute__((unused))data_format_t *format)
+{
+	stack_t *last = NULL;
 
+	if ((*stack) == NULL || (*stack)->next == NULL)
+		return (1);
+	last = *stack;
+	while (last->next != NULL)
+		last = last->next;
+	if (last->prev != NULL)
+		last->prev->next = NULL;
+	last->prev = NULL;
+	last->next = *stack;
+	(*stack)->prev = last;
+	*stack = last;
+	return (1);
+}

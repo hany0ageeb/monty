@@ -110,6 +110,8 @@ int set_instruction_t_func(instruction_t *inst, size_t line_number)
 			inst->f = &pstr_opcode;
 		else if (str_equal(inst->opcode, "rotl"))
 			inst->f = &rotl_opcode;
+		else if (str_equal(inst->opcode, "rotr"))
+			inst->f = &rotr_opcode;
 		else
 		{
 			fprintf(stderr, "L%lu: unknown instruction %s\n",
