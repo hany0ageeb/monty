@@ -26,7 +26,8 @@ int nop_opcode(
  * Return: 1 on success 0 on failure
  */
 int add_opcode(stack_t **stack, unsigned int line_number,
-		__attribute__((unused))char *arg, data_format_t *format)
+		__attribute__((unused))char *arg,
+		__attribute__((unused))data_format_t *format)
 {
 	stack_t *op2, *op1, *result;
 
@@ -37,10 +38,7 @@ int add_opcode(stack_t **stack, unsigned int line_number,
 	}
 	op2 = pop_stack_t(stack);
 	op1 = pop_stack_t(stack);
-	if ((*format) == STACK_FORMAT)
-		result = push_stack_t(stack, op1->n + op2->n);
-	else
-		result = enqueue_stack_t(stack, op1->n + op2->n);
+	result = push_stack_t(stack, op1->n + op2->n);
 	free_stack_t(&op1);
 	free_stack_t(&op2);
 	return (result != NULL);
@@ -54,7 +52,8 @@ int add_opcode(stack_t **stack, unsigned int line_number,
  * Return: 1 on success otherwise 0
  */
 int sub_opcode(stack_t **stack, unsigned int line_number,
-		__attribute__((unused))char *arg, data_format_t *format)
+		__attribute__((unused))char *arg,
+		__attribute__((unused))data_format_t *format)
 {
 	stack_t *op2, *op1, *result;
 
@@ -65,10 +64,7 @@ int sub_opcode(stack_t **stack, unsigned int line_number,
 	}
 	op2 = pop_stack_t(stack);
 	op1 = pop_stack_t(stack);
-	if ((*format) == STACK_FORMAT)
-		result = push_stack_t(stack, op1->n - op2->n);
-	else
-		result = enqueue_stack_t(stack, op1->n - op2->n);
+	result = push_stack_t(stack, op1->n - op2->n);
 	free_stack_t(&op1);
 	free_stack_t(&op2);
 	return (result != NULL);
@@ -82,7 +78,8 @@ int sub_opcode(stack_t **stack, unsigned int line_number,
  * Return: 1 on success 0 on failure
  */
 int div_opcode(stack_t **stack, unsigned int line_number,
-		__attribute__((unused))char *arg, data_format_t *format)
+		__attribute__((unused))char *arg,
+		__attribute__((unused))data_format_t *format)
 {
 	stack_t *op2 = NULL, *op1 = NULL, *result = NULL;
 
@@ -99,10 +96,7 @@ int div_opcode(stack_t **stack, unsigned int line_number,
 		return (0);
 	}
 	op1 = pop_stack_t(stack);
-	if ((*format) == STACK_FORMAT)
-		result = push_stack_t(stack, op1->n / op2->n);
-	else
-		result = enqueue_stack_t(stack, op1->n / op2->n);
+	result = push_stack_t(stack, op1->n / op2->n);
 	free_stack_t(&op1);
 	free_stack_t(&op2);
 	return (result != NULL);
@@ -116,7 +110,8 @@ int div_opcode(stack_t **stack, unsigned int line_number,
  * Return: 1 on success 0 on failure
  */
 int mul_opcode(stack_t **stack, unsigned int line_number,
-		__attribute__((unused))char *arg, data_format_t *format)
+		__attribute__((unused))char *arg,
+		__attribute__((unused))data_format_t *format)
 {
 	stack_t *op2 = NULL, *op1 = NULL, *result = NULL;
 
@@ -127,10 +122,7 @@ int mul_opcode(stack_t **stack, unsigned int line_number,
 	}
 	op2 = pop_stack_t(stack);
 	op1 = pop_stack_t(stack);
-	if ((*format) == STACK_FORMAT)
-		result = push_stack_t(stack, op1->n * op2->n);
-	else
-		result = enqueue_stack_t(stack, op1->n * op2->n);
+	result = push_stack_t(stack, op1->n * op2->n);
 	free_stack_t(&op1);
 	free_stack_t(&op2);
 	return (result != NULL);
