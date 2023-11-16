@@ -71,8 +71,8 @@ int is_integer(const char *str)
 
 	if (is_null_or_empty(str))
 		return (0);
-	if (str[0] == '-' || str[0] == '+')
-		i++;
+	if (str[0] == '-')
+		i = 1;
 	for (; str[i] != '\0'; ++i)
 	{
 		if (str[i] < '0' || str[i] > '9')

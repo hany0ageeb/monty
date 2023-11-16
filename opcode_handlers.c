@@ -16,16 +16,18 @@ int push_opcode(stack_t **stack, unsigned int line_number,
 		char *arg, data_format_t *format)
 {
 	stack_t *node = NULL;
+	int val;
 
 	if (!is_integer(arg))
 	{
 		fprintf(stderr, "L%u: usage: push integer\n", line_number);
 		return (0);
 	}
+	val = atoi(arg);
 	if ((*format) == STACK_FORMAT)
-		node = push_stack_t(stack, atoi(arg));
+		node = push_stack_t(stack, val);
 	else
-		node = enqueue_stack_t(stack, atoi(arg));
+		node = enqueue_stack_t(stack, val);
 	if (node == NULL)
 		return (0);
 	return (1);
