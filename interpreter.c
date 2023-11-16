@@ -153,7 +153,7 @@ int interpret_file(const char *file)
 		}
 		if (set_instruction_t_func(inst, line_number))
 		{
-			if (!inst->f(&stack, line_number, inst->arg, &format))
+			if (inst != NULL && !inst->f(&stack, line_number, inst->arg, &format))
 			{
 				ret = EXIT_FAILURE;
 				break;
