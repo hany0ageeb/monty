@@ -1,6 +1,7 @@
 #ifndef MONTY_H
 #define MONTY_H
 #include <stddef.h>
+#define IS_AT_END(c) ((c) == '\0' || (c) == '\n')
 /**
  * enum data_format - Data Format (Stack or Queu)
  * @STACK_FORMAT: stack data format
@@ -83,6 +84,10 @@ int pstr_opcode(stack_t **stack, unsigned int line_number, char *arg,
 int rotl_opcode(stack_t **stack, unsigned int line_number, char *arg,
 		data_format_t *format);
 int rotr_opcode(stack_t **stack, unsigned int line_number, char *arg,
+		data_format_t *format);
+int stack_opcode(stack_t **stack, unsigned int line_number, char *arg,
+		data_format_t *format);
+int queue_opcode(stack_t **stack, unsigned int line_number, char *arg,
 		data_format_t *format);
 int interpret_file(const char *file);
 #endif

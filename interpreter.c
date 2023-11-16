@@ -19,13 +19,18 @@ int is_alphanumeric(const char c)
 			);
 }
 /**
- * is_at_end - check if c is end char in line
- * @c: char to check
- * Return: true if c is either '\0' or '\n' otherwise false.
+ * print_unknown - print unknow instruction
+ * @inst: instruction_t object
+ * @line_number: line number
+ * Return: always 0
  */
-int is_at_end(const char c)
+int print_unknown(instruction_t *inst, size_t line_number)
 {
-	return (c == '\0' || c == '\n');
+	fprintf(stderr, "L%lu: unknown instruction %s\n",
+			line_number, inst->opcode);
+	if (inst != NULL)
+		inst->f = NULL;
+	return (0);
 }
 /**
  * tokenize - given monty bytecode line return instruction_t object
@@ -38,14 +43,14 @@ instruction_t *tokenize(const char *line)
 	instruction_t *inst = NULL;
 
 	errno = 0;
-	while (line != NULL && !is_at_end(line[current]))
+	while (line != NULL && !(IS_AT_END(line[current])))
 	{
 		if (line[current] == ' ' || line[current] == '\t')
-			while (!is_at_end(line[current]) &&
+			while (!(IS_AT_END(line[current])) &&
 					(line[current] == ' ' || line[current] == '\t'))
 				current++;
 		else if (line[current] == '#')
-			while (!is_at_end(line[current]))
+			while (!(IS_AT_END(line[current])))
 				current++;
 		else
 		{
@@ -53,7 +58,7 @@ instruction_t *tokenize(const char *line)
 				inst = create_instruction_t(NULL, NULL);
 			if (inst == NULL)
 				return (inst);
-			while (!is_at_end(line[current]) && is_alphanumeric(line[current]))
+			while (!(IS_AT_END(line[current])) && is_alphanumeric(line[current]))
 				current++;
 			if (inst->opcode == NULL)
 				inst->opcode = sub_str(line, start, current - 1);
@@ -81,7 +86,6 @@ int set_instruction_t_func(instruction_t *inst, size_t line_number)
 {
 	if (inst != NULL)
 	{
-		inst->f = NULL;
 		if (str_equal(inst->opcode, "push"))
 			inst->f = &push_opcode;
 		else if (str_equal(inst->opcode, "pall"))
@@ -112,12 +116,12 @@ int set_instruction_t_func(instruction_t *inst, size_t line_number)
 			inst->f = &rotl_opcode;
 		else if (str_equal(inst->opcode, "rotr"))
 			inst->f = &rotr_opcode;
+		else if (str_equal(inst->opcode, "stack"))
+			inst->f = &stack_opcode;
+		else if (str_equal(inst->opcode, "queue"))
+			inst->f = &queue_opcode;
 		else
-		{
-			fprintf(stderr, "L%lu: unknown instruction %s\n",
-					line_number, inst->opcode);
-			return (0);
-		}
+			return (print_unknown(inst, line_number));
 	}
 	return (1);
 }
